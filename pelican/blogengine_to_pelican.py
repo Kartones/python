@@ -12,7 +12,7 @@ import re
 class BlogEngineToPelican(object):
   """
   Script to migrate posts from BlogEngine.net to Pelican.
-  Read http://blog.kartones.net/post/script-to-migrate-from-blogengine-to-pelican for more info.
+  Read http://blog.kartones.net/post/migrating-from-blogengine-to-pelican for more info.
   """
 
     # From categories.xml
