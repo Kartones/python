@@ -1,2 +1,4 @@
 change_detector_data.json
 urls.txt
+*__pycache__*
+
