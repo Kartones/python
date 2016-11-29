@@ -1,0 +1,9 @@
+#!/usr/bin/python
+# coding: utf-8
+
+MAIL_SERVER = "xxx"
+MAIL_PORT = 587
+MAIL_USER = "xxx"
+MAIL_PASSWORD = "xxx"
+MAIL_SENDER = "xxx"
+MAIL_RECIPIENTS = ["xxx", "xxx"]
