@@ -50,7 +50,7 @@ def login():
         if request.form.get("pass") == config.PASS:
             response = make_response(redirect("/", code=302))
             # 1 year age
-            response.set_cookie(key=config.COOKIE_KEY, value=config.COOKIE_PASS, max_age=535680)
+            response.set_cookie(key=config.COOKIE_KEY, value=config.COOKIE_PASS, max_age=31536000)
             return response
         else:
             return render_template("login.html")
