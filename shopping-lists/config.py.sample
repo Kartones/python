@@ -1,0 +1,5 @@
+
+LISTS_FOLDER = "data"
+PASS = "a_fancy_password"
+COOKIE_KEY = "some_cookie_name"
+COOKIE_PASS = "some_cookie_paswword_which_really_is_just_a_value"

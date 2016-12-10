@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Shopping List {{ list_name }}</title>
+  </head>
+<body role="document">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Lists</a></li>
+            <li class="active"><a href="#">Items</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" style="margin-top: 42px">
+      <h3>List {{ list_name }}</h3>
+      <div id="items-buttons">
+        {% for item in items %}
+            <button type="button" class="item btn btn-lg {{ item[2] }}" data-state="{{ item[1] }}"
+                data-key="{{ item[0] }}">{{ item[0] }}</button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+          <input id="newItemName" type="text" placeholder="New item..." />
+          <button id="addNewItemButton" type="button" class="btn btn-default"><strong>+</strong></button>
+      </div>
+    </footer>
+
+    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      window.timeoutHandler = null;
+
+      function toggleItem(e) {
+        var $target = $(e.target);
+        var state = parseInt($target.data("state"), 10);
+
+        switch(state) {
+          case 0:
+              $target.data("state", 1);
+              $target.addClass("btn-warning").removeClass("btn-default");
+          break;
+          case 1:
+              $target.data("state", 2);
+              $target.addClass("btn-danger").removeClass("btn-warning");
+          break;
+          case 2:
+              $target.data("state", 3);
+              $target.addClass("btn-deleted").removeClass("btn-danger");
+          break;
+          case 3:
+              $target.data("state", 0);
+              $target.addClass("btn-default").removeClass("btn-deleted");
+          break;
+        }
+
+        if (window.timeoutHandler != null) {
+          clearTimeout(window.timeoutHandler);
+        }
+        window.timeoutHandler = setTimeout(applyStateChange, 1000);
+      };
+
+      function applyStateChange() {
+        clearTimeout(window.timeoutHandler);
+        window.timeoutHandler = null;
+        saveList();
+      };
+
+      function saveList() {
+        var items = [];
+        $("#items-buttons button").each(
+          function(key, value) {
+            var $target = $(value);
+            if ($target.data("state") != "3") {
+                items.push($target.text() + " " + $target.data("state"));
+              }
+          }
+        );
+        $.post("/items/" + encodeURIComponent("{{ list_name }}"), encodeURIComponent(items));
+      };
+
+      function addNewItemToList() {
+        var newItemName = $("#newItemName")[0].value.trim().toLowerCase();
+        if (newItemName.length > 0 && !itemExists(newItemName)) {
+          $(
+            "<button type=\"button\" class=\"item btn btn-lg btn-warning\" data-state=\"1\" data-key=\"" +
+            newItemName + "\">" + newItemName + "</button>"
+            ).appendTo("#items-buttons");
+          $("#newItemName")[0].value = "";
+          saveList();
+        }
+      };
+
+      function itemExists(itemName) {
+        return $("#items-buttons button[data-key=\"" + itemName + "\"]").length > 0;
+      }
+
+      $("#items-buttons").on("click", "button", toggleItem);
+      $("#addNewItemButton").on("click", addNewItemToList);
+    </script>
+</body>
+</html>
