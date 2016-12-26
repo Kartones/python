@@ -29,7 +29,7 @@ def send_mail(recipients, subject, body):
 #  https://developer.yahoo.com/weather/
 def query_weather(woeid):
     payload = {
-        'q': 'select * from weather.forecast where woeid in ({}) and u="c"'.format(woeid),
+        'q': 'select * from weather.forecast where woeid ="{}" and u="c"'.format(woeid),
         'format': 'json'
     }
     response = requests.get('https://query.yahooapis.com/v1/public/yql', params=payload)
@@ -38,6 +38,9 @@ def query_weather(woeid):
 
 def setup_mail_data(weather_data):
     recipients = config.MAIL_RECIPIENTS
+    if weather_data['query']['count'] == 0 or weather_data['query']['results'] is None:
+        raise ValueError("No results found")
+
     item = weather_data['query']['results']['channel']['item']
     item['description'] = item['description'].replace('<![CDATA[', '').replace(']]>', '')
     subject = "Madrid weather forecast - {}".format(datetime.date.today())
@@ -46,7 +49,7 @@ def setup_mail_data(weather_data):
 
 
 def main():
-    # Selecting place:  select woeid from geo.places(1) where text="madrid, spain"
+    # Selecting place:  select woeid from geo.places(1) where text="madrid"
     madrid_woeid = '766273'
     data = query_weather(woeid=madrid_woeid)
     recipients, subject, body = setup_mail_data(data)
