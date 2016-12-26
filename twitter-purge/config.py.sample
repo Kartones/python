@@ -1,0 +1,6 @@
+# Register new app at https://apps.twitter.com/ and fill the fields
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
+TOKEN = ""
+TOKEN_SECRET = ""
+DAYS_TO_KEEP = 5
