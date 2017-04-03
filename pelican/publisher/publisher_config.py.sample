@@ -1,0 +1,60 @@
+
+# For Publisher
+# -------------
+OUTPUT_FOLDER = "out"
+FTP_HOST = "..."
+FTP_USERNAME = "..."
+FTP_PASSWORD = "..."
+FTP_PASIVE_MODE = False
+FTP_FOLDER = "..."
+THEME_FOLDER = "..."
+WEBSITE_BASE_URL = "http://blog.kartones.net/"  # Must have trailing slash
+ALWAYS_MODIFIED_FILES = [
+    "archives.html",
+    "index.html",
+    "index2.html",
+    "index3.html",
+    "index4.html",
+    "index5.html",
+    "index6.html",
+    "index7.html",
+    "index8.html",
+    "index9.html",
+    "index10.html",
+    "syndication.atom.xml",
+    "syndication.axd",      # Compatibility with old .NET blog
+    "syndication.rss"
+]
+
+# for AssetPostProcessor
+# ----------------------
+FILES_TO_DUPLICATE = (
+                      ('syndication.atom.xml', 'syndication.axd'),
+                     )
+
+FOLDERS_TO_CREATE = ()
+
+FOLDERS_TO_REMOVE = (
+                     'tag',
+                     'category',
+                     'author'
+                    )
+
+FILES_TO_COPY = (
+                 'favicon.ico',
+                 'robots.txt'
+                )
+
+FILES_TO_REMOVE = (
+                   'theme/css/blog-styles.css',
+                   'theme/css/bootstrap.min.css',
+                   'theme/js/bootstrap.js',
+                   'theme/js/clean-blog.js',
+                   'theme/js/jquery.js',
+                   'authors.html',
+                   'categories.html',
+                   'tags.html'
+                  )
+
+# Warning, if set to false, there is no logic to handle uploading every index<count>.html file
+TRUNCATED_PAGINATION = True

@@ -16,7 +16,9 @@ Miscellaneous Python code snippets and experiments.
 
 ### Folders / Projects
 * `\game-of-life-kata`: A coding kata. Inside-out TDD approach + PyGame "visualizer".
-* `\pelican`: Plugins for the Pelican static site generator tool.
+* `\pelican\plugins`: Plugins for the Pelican static site generator tool.
+* `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
+* `\pelican\publisher`: Tool to allow post-processing of Pelican builds and optionally upload a post via FTP.
 * `\rpg-combat-kata`: A coding kata. I went for an inside-out TDD approach, building only the minimal needed functionality.
 * `\shopping-lists`: A pet project to easily manage shopping lists. Mobile-friendly although nothing too complex nor feature-full. See its README for more details.
 * `\twitter-purge`: Script to delete your tweets older than X days (5 with sample config). Best setup as a cron job to run hourly or daily.
