@@ -3,3 +3,5 @@ urls.txt
 *__pycache__*
 */config.py
 twitter-purge/run.sh
+*.cache*
+*.mypy_cache*

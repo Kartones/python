@@ -15,6 +15,7 @@ Miscellaneous Python code snippets and experiments.
 ```
 
 ### Folders / Projects
+* `\double-linked-list`: A basic Python implementation of a double linked list. Based on a blog post but improved a bit, main purpose was to have a working example with mypy & flake8 linter tests running.
 * `\game-of-life-kata`: A coding kata. Inside-out TDD approach + PyGame "visualizer".
 * `\pelican\plugins`: Plugins for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
