@@ -2,7 +2,7 @@ from expects import *
 from doublex import *
 from doublex_expects import *
 
-from grid import *
+from grid import Grid
 
 
 with description("Game of Life kata (inside out approach)"):

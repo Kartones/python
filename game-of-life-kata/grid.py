@@ -15,20 +15,9 @@ class Grid():
     def advance_generation(self):
         self.matrix = self.grid_tick()
 
-    def should_cell_live(self, x, y):
-        if self.get_cell(x, y) == 0:
-            return False
-        count = self._count_adjacent_cells(x, y)
-        return (count == 2 or count == 3)
-
-    def should_cell_reproduce_here(self, x, y):
-        if self.get_cell(x, y) == 1:
-            return False
-        count = self._count_adjacent_cells(x, y)
-        return count == 3
-
     def cell_tick(self, x, y):
-        if self.should_cell_live(x, y) or self.should_cell_reproduce_here(x, y):
+        if self._count_adjacent_cells(x, y) == 3 or (
+           self.get_cell(x, y) == 1 and self._count_adjacent_cells(x, y) == 2):
             return 1
         else:
             return 0
@@ -52,19 +41,14 @@ class Grid():
         matrix[self.width*y + x] = value
 
     def _count_adjacent_cells(self, x, y):
-        count = 0
-        count += self.get_cell(x - 1, y - 1)
-        count += self.get_cell(x, y - 1)
-        count += self.get_cell(x + 1, y - 1)
-        count += self.get_cell(x - 1, y)
-        count += self.get_cell(x + 1, y)
-        count += self.get_cell(x - 1, y + 1)
-        count += self.get_cell(x, y + 1)
-        count += self.get_cell(x + 1, y + 1)
-        return count
+        return (self.get_cell(x - 1, y - 1) +
+                self.get_cell(x, y - 1) +
+                self.get_cell(x + 1, y - 1) +
+                self.get_cell(x - 1, y) +
+                self.get_cell(x + 1, y) +
+                self.get_cell(x - 1, y + 1) +
+                self.get_cell(x, y + 1) +
+                self.get_cell(x + 1, y + 1))
 
     def _init_matrix(self, width, height):
-        matrix = []
-        for pos in range(width * height):
-            matrix.append(0)
-        return matrix
+        return [0 for pos in range(width * height)]
