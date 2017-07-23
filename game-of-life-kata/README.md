@@ -4,7 +4,7 @@
 
 Code kata based on [Conway's Game of life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) rules ([nice summmary here](https://github.com/marcoemrich/game-of-life-rules/blob/master/gol_rules.pdf)). For deeper details check [LifeWiki](http://www.conwaylife.com/wiki/Main_Page).
 
-![Sample game](python_game_of_life_sample.gif)
+![Sample game](doc/python_game_of_life_sample.gif)
 
 Notes:
 
@@ -35,13 +35,13 @@ python3 game.py
 ## Testing
 
 ```
-mamba -f documentation test*.py
+mamba -f documentation test/*
 ```
 Or simply:
 ```
-mamba test*.py
+mamba test/*
 ```
 For constant feedback I like doing:
 ```
-watch -n 1 mamba test*.py
+watch -n 1 mamba test/*
 ```

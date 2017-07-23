@@ -31,10 +31,7 @@ class Grid():
         return new_matrix
 
     def get_cell(self, x, y):
-        if x < 0 or y < 0 or x >= self.width or y >= self.height:
-            return 0
-        else:
-            return self.matrix[self.width*y + x]
+        return self.matrix[self.width*y + x] if (0 <= x < self.width) and (0 <= y < self.height) else 0
 
     def set_cell(self, x, y, value, matrix=None):
         matrix = self.matrix if not matrix else matrix

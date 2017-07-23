@@ -34,16 +34,10 @@ class Grid():
             return 0
 
     def get_cell(self, x, y):
-        if x < 0 or y < 0 or x >= self.width or y >= self.height:
-            return 0
-        else:
-            return self.matrix[self.width*y + x]
+        return self.matrix[self.width*y + x] if (0 <= x < self.width) and (0 <= y < self.height) else 0
 
     def get_cell_buffered(self, buffer_line, x):
-        if x < 0 or x >= self.width:
-            return 0
-        else:
-            return self.linebuffer[buffer_line][x]
+        return self.linebuffer[buffer_line][x] if 0 <= x < self.width else 0
 
     def set_cell(self, x, y, value):
         self.matrix[self.width*y + x] = value

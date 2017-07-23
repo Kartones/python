@@ -22,6 +22,7 @@ class GameOfLife():
         self.cols_range = range(self.grid.width)
 
         # self._random_populated_cells(self.width, self.height)
+        self._create_r_pentomino(63, 30)
         self._create_r_pentomino(63, 60)
 
     def run(self):
@@ -83,7 +84,7 @@ class GameOfLife():
 if __name__ == "__main__":
     width = 120
     height = 120
-    fullscreen = True
+    fullscreen = False
     game = GameOfLife(width, height, fullscreen)
     game.start()
     game.run()
