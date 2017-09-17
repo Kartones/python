@@ -8,7 +8,7 @@ FTP_PASSWORD = "..."
 FTP_PASIVE_MODE = False
 FTP_FOLDER = "..."
 THEME_FOLDER = "..."
-WEBSITE_BASE_URL = "http://blog.kartones.net/"  # Must have trailing slash
+WEBSITE_BASE_URL = "https://blog.kartones.net/"  # Must have trailing slash
 ALWAYS_MODIFIED_FILES = [
     "archives.html",
     "index.html",

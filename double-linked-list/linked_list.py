@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Any
+from typing import Any, Dict, Optional
 
 
 # Based on https://dbader.org/blog/python-linked-list

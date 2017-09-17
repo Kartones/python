@@ -1,9 +1,10 @@
-import pygame
-from pygame.locals import QUIT, K_ESCAPE, K_SPACE
-import sys
 import random
+import sys
 
 from grid_linebuffer import Grid
+
+import pygame
+from pygame.locals import K_ESCAPE, K_SPACE, QUIT
 
 
 class GameOfLife():
@@ -64,20 +65,20 @@ class GameOfLife():
         cells = []
         if num_cells is None:
             min_cells = grid_width + grid_height - 1
-            max_cells = ((grid_width-1) * (grid_height-1)) // 4
+            max_cells = ((grid_width - 1) * (grid_height - 1)) // 4
             num_cells = random.randint(min_cells, max_cells)
         for index in range(num_cells):
-            cells.append((random.randint(0, grid_width-1), random.randint(0, grid_height-1)))
+            cells.append((random.randint(0, grid_width - 1), random.randint(0, grid_height - 1)))
         self.grid.populate_cells(cells)
 
     # More patterns here: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns
     def _create_r_pentomino(self, start_x, start_y):
         cells = []
-        cells.append((start_x+1, start_y))
-        cells.append((start_x+2, start_y))
-        cells.append((start_x, start_y+1))
-        cells.append((start_x+1, start_y+1))
-        cells.append((start_x+1, start_y+2))
+        cells.append((start_x + 1, start_y))
+        cells.append((start_x + 2, start_y))
+        cells.append((start_x, start_y + 1))
+        cells.append((start_x + 1, start_y + 1))
+        cells.append((start_x + 1, start_y + 2))
         self.grid.populate_cells(cells)
 
 

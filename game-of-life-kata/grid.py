@@ -31,11 +31,11 @@ class Grid():
         return new_matrix
 
     def get_cell(self, x, y):
-        return self.matrix[self.width*y + x] if (0 <= x < self.width) and (0 <= y < self.height) else 0
+        return self.matrix[self.width * y + x] if (0 <= x < self.width) and (0 <= y < self.height) else 0
 
     def set_cell(self, x, y, value, matrix=None):
         matrix = self.matrix if not matrix else matrix
-        matrix[self.width*y + x] = value
+        matrix[self.width * y + x] = value
 
     def _count_adjacent_cells(self, x, y):
         return (self.get_cell(x - 1, y - 1) +
