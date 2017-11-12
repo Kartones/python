@@ -2,6 +2,7 @@ change_detector_data.json
 urls.txt
 *__pycache__*
 */config.py
+*/secrets.py
 twitter-purge/run.sh
 *.cache*
 *.mypy_cache*
