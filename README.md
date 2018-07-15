@@ -20,6 +20,7 @@ Miscellaneous Python code snippets and experiments.
 * `\pelican\plugins`: Plugins for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
 * `\pelican\publisher`: Tool to allow post-processing of Pelican builds and optionally upload a post via FTP.
+* `\pic-to-png`: Exporter from Oper Soft's old MS-DOS games .PIC files to .PNG images.
 * `\rpg-combat-kata`: A coding kata. I went for an inside-out TDD approach, building only the minimal needed functionality.
 * `\shopping-lists`: A pet project to easily manage shopping lists. Mobile-friendly although nothing too complex nor feature-full. See its README for more details.
 * `\trello-backup`: Script to export your trello boards as json files, plus all attachments. One folder per board with data inside.
