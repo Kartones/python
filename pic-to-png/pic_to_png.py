@@ -27,7 +27,7 @@ def increment_counters(x_counter, y_counter):
         # jump 2 lines to make space for 2nd pass
         y_counter += 2
     if y_counter == SIZE_Y:
-        # Strart 2nd pass, reading odd lines
+        # Start 2nd pass, reading odd lines
         y_counter = 1
     return x_counter, y_counter
 
@@ -42,7 +42,7 @@ def store_pixel(byte_int, target_image, image_pixels, x_counter, y_counter):
     elif byte_int == 3:
         color = (255, 255, 255)  # white
 
-    if y_counter < 200:
+    if y_counter < SIZE_Y:
         if DEBUG:
             print(f"({x_counter},{y_counter}):{color}")
         image_pixels[x_counter, y_counter] = color
@@ -111,7 +111,7 @@ def export():
             if x_counter == 0 and y_counter == 1:
                 byte = file_handle.read(192)
 
-    image.save(f"{time.time()}.png")
+    image.save(f"FILENAME_{time.time()}.png")
 
 
 if __name__ == "__main__":
