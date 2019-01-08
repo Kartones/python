@@ -22,9 +22,7 @@ def test_mypy_compliance() -> None:
                                           shell=True,
                                           stderr=sys.stderr).decode("ascii").replace("\n", "")
 
-    result = subprocess.call("{} --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs"
-                             " --warn-redundant-casts --warn-return-any --warn-unused-ignores --strict-optional"
-                             " {}".format(mypy_binary, SOURCE_FOLDER),
+    result = subprocess.call("{} --config-file ../mypy.ini {}".format(mypy_binary, SOURCE_FOLDER),
                              shell=True,
                              stdout=sys.stdout,
                              stderr=sys.stderr)

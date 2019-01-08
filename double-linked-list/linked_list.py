@@ -6,9 +6,9 @@ from typing import Any, Dict, Optional
 class LinkedListNode:
 
     def __init__(self,
-                 data: Dict=None,
-                 previous_node: Optional["LinkedListNode"]=None,
-                 next_node: Optional["LinkedListNode"]=None) -> None:
+                 data: Dict = None,
+                 previous_node: Optional["LinkedListNode"] = None,
+                 next_node: Optional["LinkedListNode"] = None) -> None:
         if data is None:
             data = dict()
         self.data = data
@@ -22,6 +22,7 @@ class LinkedList:
     """
 
     def __init__(self) -> None:
+        # H <-> N1 <-> N2 <-> ... <-> T
         self.head = None    # type: Optional["LinkedListNode"]
         self.tail = None    # type: Optional["LinkedListNode"]
 
@@ -51,13 +52,18 @@ class LinkedList:
 
     def find(self, target_key: str, target_value: Any) -> Optional["LinkedListNode"]:
         """
-        O(N) Search for first occurrence of desired data
+        O(N) Search for first occurrence of desired data (key-value pair)
         """
         current_node = self.head
-        while (current_node is not None and (target_key not in current_node.data.keys() or
-               (target_key in current_node.data.keys() and current_node.data[target_key] != target_value))):
+        while (
+            current_node is not None and (
+                target_key not in current_node.data.keys() or
+                (target_key in current_node.data.keys() and current_node.data[target_key] != target_value)
+            )
+        ):
             current_node = current_node.next_node
-        return current_node     # Or None if not found
+
+        return current_node
 
     def remove(self, target_key: str, target_value: Any) -> None:
         """
@@ -92,10 +98,19 @@ class LinkedList:
         previous_node = None
         next_node = None
         while current_node is not None:
+            # 1. reversing cursors
             next_node = current_node.next_node
+
+            # 2. next node becomes previous node
+            current_node.previous_node = next_node
+            # 3. previous node becomes next node
             current_node.next_node = previous_node
+
+            # 4. reversing cursors
             previous_node = current_node
+            # 5. reversing cursors
             current_node = next_node
+
         self.head = previous_node
         if self.head is not None:
             self.head.previous_node = None

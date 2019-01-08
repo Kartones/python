@@ -1,0 +1,16 @@
+version: "2"
+services:
+  python-assorted:
+    build:
+      args:
+        uid: ${UID}
+        gid: ${GID}
+      context: ..
+      dockerfile: build/Dockerfile
+    image: python-assorted
+    volumes:
+      - ..:/code
+      - ..:/opt/python-assorted
+      - ~/.bash_history.python-assorted:/home/python-assorted/.bash_history
+    working_dir: /code
+    command: "/bin/true"

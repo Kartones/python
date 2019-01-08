@@ -199,6 +199,7 @@ def test_reversing_list() -> None:
     assert linked_list.head is not None
     assert linked_list.head.data == node_4_data
     assert linked_list.head.previous_node is None
+
     second_node = linked_list.head.next_node
     assert second_node is not None
     assert second_node.data == node_3_data
@@ -209,8 +210,20 @@ def test_reversing_list() -> None:
     assert fourth_node is not None
     assert fourth_node.data == node_1_data
     assert fourth_node.next_node is None
+
     assert linked_list.tail is not None
     assert fourth_node.data == linked_list.tail.data
+
+    # Now go back to check previous links
+    third_node = fourth_node.previous_node
+    assert third_node is not None
+    assert third_node.data == node_2_data
+    second_node = third_node.previous_node
+    assert second_node is not None
+    assert second_node.data == node_3_data
+    first_node = second_node.previous_node
+    assert first_node is not None
+    assert first_node.data == node_4_data
 
 
 def test_reversing_empty_list() -> None:
