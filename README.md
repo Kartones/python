@@ -15,7 +15,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 
 ### Individual files / Scripts
-* `\change_detector.py`: Given a list of urls fetches their HTML, stores a CRC32 and upon next run will compare stored CRC with new one to see if has changed. Call me lazy ;)
+* `\change_detector.py`: Given a list of urls fetches their HTML, stores a CRC32 and upon next run will compare stored CRC with new one to see if has changed.
 * `\list_search.py`: Search for a command line provided string in all txt files of folder where script is launched. Made for personal use as I keep my catalog of games, movies, etc. in text files. Sample text files format:
 ```
 0   /media/kartones/pre1/test 1/blablabla
@@ -26,7 +26,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 ```
 
 ### Folders / Projects
-* `\double-linked-list`: A basic Python implementation of a double linked list. Based on a blog post but improved a bit, main purpose was to have a working example with mypy & flake8 linter tests running.
+* `\double-linked-list`: A Python implementation of a double linked list, with reversing, item flipping and inserting at specific position (by data).
 * `\game-of-life-kata`: A coding kata. Inside-out TDD approach + PyGame "visualizer".
 * `\pelican\plugins`: Plugins for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
