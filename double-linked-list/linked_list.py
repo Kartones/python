@@ -15,6 +15,13 @@ class LinkedListNode:
         self.previous_node = previous_node
         self.next_node = next_node
 
+    def __repr__(self) -> str:
+        return "|{} <- {} -> {}|".format(
+            str(self.previous_node.data) if self.previous_node else "{}",
+            str(self.data),
+            str(self.next_node.data) if self.next_node else "{}"
+        )
+
 
 class LinkedList:
     """
@@ -25,6 +32,16 @@ class LinkedList:
         # H <-> N1 <-> N2 <-> ... <-> T
         self.head = None    # type: Optional["LinkedListNode"]
         self.tail = None    # type: Optional["LinkedListNode"]
+
+    def __repr__(self) -> str:
+        nodes = []
+
+        current_node = self.head
+        while current_node is not None:
+            nodes.append(str(current_node))
+            current_node = current_node.next_node
+
+        return " , ".join(nodes)
 
     def prepend(self, data: Dict) -> None:
         """

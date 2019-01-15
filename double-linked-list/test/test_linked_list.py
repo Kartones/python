@@ -97,7 +97,6 @@ def test_finding_elements() -> None:
     node_3_data = {"id": 3}
     other_data = {"id": 4}
     linked_list = LinkedList()
-
     linked_list.append(node_1_data)
     linked_list.append(node_2_data)
     linked_list.append(node_3_data)
@@ -132,9 +131,7 @@ def test_removing_elements() -> None:
     node_2_data = {"id": 2}
     node_3_data = {"id": 3}
     node_4_data = {"id": 4}
-
     linked_list = LinkedList()
-
     linked_list.append(node_1_data)
     linked_list.append(node_2_data)
     linked_list.append(node_3_data)
@@ -188,7 +185,6 @@ def test_reversing_list() -> None:
     node_3_data = {"id": 3}
     node_4_data = {"id": 4}
     linked_list = LinkedList()
-
     linked_list.append(node_1_data)
     linked_list.append(node_2_data)
     linked_list.append(node_3_data)
