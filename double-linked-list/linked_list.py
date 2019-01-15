@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
 
 
-# Based on https://dbader.org/blog/python-linked-list
+# Initial single-linked list idea: https://dbader.org/blog/python-linked-list
 
 class LinkedListNode:
 
