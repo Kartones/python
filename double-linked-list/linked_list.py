@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import (Any, Callable, Dict, Optional)
 
 
 # Initial single-linked list idea: https://dbader.org/blog/python-linked-list
@@ -30,8 +30,10 @@ class LinkedList:
 
     def __init__(self) -> None:
         # H <-> N1 <-> N2 <-> ... <-> T
-        self.head = None    # type: Optional["LinkedListNode"]
-        self.tail = None    # type: Optional["LinkedListNode"]
+        self.head: Optional["LinkedListNode"] = None
+        self.tail: Optional["LinkedListNode"] = None
+
+        self.__iteration_cursor: Optional[LinkedListNode] = self.head
 
     def __repr__(self) -> str:
         nodes = []
@@ -45,6 +47,18 @@ class LinkedList:
             "H:{} T:{} ".format(self.head.data if self.head else "{}", self.tail.data if self.tail else "{}"),
             " , ".join(nodes)
         ])
+
+    def __iter__(self) -> "LinkedList":
+        self.__iteration_cursor = self.head
+        return self
+
+    def __next__(self) -> LinkedListNode:
+        if self.__iteration_cursor:
+            current_node = self.__iteration_cursor
+        else:
+            raise StopIteration
+        self.__iteration_cursor = self.__iteration_cursor.next_node
+        return current_node
 
     def prepend(self, data: Dict) -> None:
         """
@@ -156,8 +170,8 @@ class LinkedList:
 
     def flip(self, first_node: LinkedListNode, second_node: LinkedListNode, key: str) -> None:
         """
-        O(N^2) Flips/interchanges two nodes' positions.
-               Note: Assumes second_node is after first_node
+        O(N) Flips/interchanges two nodes' positions in-place
+             Note: Assumes second_node is always after first_node
         """
         if not first_node or not second_node:
             raise ValueError("Must provide non-empty nodes")
@@ -177,7 +191,7 @@ class LinkedList:
 
         # special case, consecutive nodes
         if node_b_previous_node == node_a:
-            # because we'll first insert A, then B, so prepending B will end up before A
+            # because we'll first insert A, then B, so prepending B will make it end up before A
             node_b_previous_node = node_a_previous_node
 
         self.remove(target_key=key, target_value=node_a.data[key])
@@ -190,3 +204,29 @@ class LinkedList:
             self.insert_after(data=node_b.data, needle_key=key, needle_value=node_a_previous_node.data[key])
         else:
             self.prepend(data=node_b.data)
+
+    def clear(self) -> None:
+        """
+        O(N) Removes all elements from the list
+        """
+        current_node = self.head
+        next_node = None
+        while current_node is not None:
+            next_node = current_node.next_node
+            current_node.previous_node = None
+            current_node.next_node = None
+            current_node = next_node
+        self.head = None
+        self.tail = None
+
+    def sort(self, comparison_function: Callable, reverse: bool = False) -> None:
+        """
+        O(N^2) Sorts the list items given a custom comparison function. By default sort is ascending.
+               Note: No safety checks on comparison_function.
+        """
+        ordered_list = sorted(self, key=comparison_function, reverse=reverse)
+
+        self.clear()
+
+        for node in ordered_list:
+            self.append(data=node.data)

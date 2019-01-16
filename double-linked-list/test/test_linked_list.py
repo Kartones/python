@@ -371,3 +371,92 @@ def test_flip() -> None:
     assert fifth_node.previous_node.data == node_3_data
     assert fifth_node.next_node is None
     assert linked_list.tail.data == node_1_data
+
+
+def test_clear() -> None:
+    node_1_data = {"id": 1}
+    node_2_data = {"id": 2}
+    node_3_data = {"id": 3}
+    node_4_data = {"id": 4}
+
+    linked_list = LinkedList()
+    linked_list.append(node_4_data)
+    linked_list.append(node_3_data)
+    linked_list.append(node_2_data)
+    linked_list.append(node_1_data)
+
+    linked_list.clear()
+
+    assert linked_list.head is None
+    assert linked_list.tail is None
+
+
+def node_comparison_function(node):
+    return int(node.data["id"]) if node else 0
+
+
+def test_sorting() -> None:
+    node_1_data = {"id": 1}
+    node_2_data = {"id": 2}
+    node_3_data = {"id": 3}
+    node_4_data = {"id": 4}
+
+    linked_list = LinkedList()
+    linked_list.append(node_4_data)
+    linked_list.append(node_3_data)
+    linked_list.append(node_2_data)
+    linked_list.append(node_1_data)
+
+    # 4 3 2 1 -> 1 2 3 4
+    linked_list.sort(comparison_function=node_comparison_function)
+
+    first_node = linked_list.head
+    assert first_node.data == node_1_data
+    assert first_node.previous_node is None
+    assert first_node.next_node.data == node_2_data
+    second_node = linked_list.head.next_node
+    assert second_node is not None
+    assert second_node.data == node_2_data
+    assert second_node.previous_node.data == node_1_data
+    assert second_node.next_node.data == node_3_data
+    third_node = second_node.next_node
+    assert third_node is not None
+    assert third_node.data == node_3_data
+    assert third_node.previous_node.data == node_2_data
+    assert third_node.next_node.data == node_4_data
+    fourth_node = third_node.next_node
+    assert fourth_node is not None
+    assert fourth_node.data == node_4_data
+    assert fourth_node.previous_node.data == node_3_data
+    assert fourth_node.next_node is None
+    assert linked_list.tail.data == node_4_data
+
+    linked_list = LinkedList()
+    linked_list.append(node_1_data)
+    linked_list.append(node_2_data)
+    linked_list.append(node_3_data)
+    linked_list.append(node_4_data)
+
+    # 1 2 3 4 -> 4 3 2 1
+    linked_list.sort(comparison_function=node_comparison_function, reverse=True)
+
+    first_node = linked_list.head
+    assert first_node.data == node_4_data
+    assert first_node.previous_node is None
+    assert first_node.next_node.data == node_3_data
+    second_node = linked_list.head.next_node
+    assert second_node is not None
+    assert second_node.data == node_3_data
+    assert second_node.previous_node.data == node_4_data
+    assert second_node.next_node.data == node_2_data
+    third_node = second_node.next_node
+    assert third_node is not None
+    assert third_node.data == node_2_data
+    assert third_node.previous_node.data == node_3_data
+    assert third_node.next_node.data == node_1_data
+    fourth_node = third_node.next_node
+    assert fourth_node is not None
+    assert fourth_node.data == node_1_data
+    assert fourth_node.previous_node.data == node_2_data
+    assert fourth_node.next_node is None
+    assert linked_list.tail.data == node_1_data

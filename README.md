@@ -26,7 +26,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 ```
 
 ### Folders / Projects
-* `\double-linked-list`: A Python implementation of a double linked list, with reversing, item flipping and inserting at specific position (by data).
+* `\double-linked-list`: A Python implementation of a double linked list, with sorting, reversing, item flipping and inserting at specific position (by data).
 * `\game-of-life-kata`: A coding kata. Inside-out TDD approach + PyGame "visualizer".
 * `\pelican\plugins`: Plugins for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
