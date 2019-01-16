@@ -24,9 +24,6 @@ class LinkedListNode:
 
 
 class LinkedList:
-    """
-    Double linked list implementation
-    """
 
     def __init__(self) -> None:
         # H <-> N1 <-> N2 <-> ... <-> T
