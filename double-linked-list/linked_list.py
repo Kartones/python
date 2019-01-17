@@ -1,8 +1,6 @@
 from typing import (Any, Callable, Dict, Optional)
 
 
-# Initial single-linked list idea: https://dbader.org/blog/python-linked-list
-
 class LinkedListNode:
 
     def __init__(self,
