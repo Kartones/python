@@ -137,7 +137,8 @@ def test_removing_elements() -> None:
     linked_list.append(node_3_data)
     linked_list.append(node_4_data)
 
-    linked_list.remove(target_key="id", target_value=node_2_data["id"])
+    node_2 = linked_list.find(target_key="id", target_value=node_2_data["id"])
+    linked_list.remove(node_2)
     assert linked_list.head is not None
     assert linked_list.head.data == node_1_data
     assert linked_list.head.next_node is not None
@@ -147,7 +148,8 @@ def test_removing_elements() -> None:
     assert linked_list.tail.previous_node is not None
     assert linked_list.tail.previous_node.data == node_3_data
 
-    linked_list.remove(target_key="id", target_value=node_1_data["id"])
+    node_1 = linked_list.find(target_key="id", target_value=node_1_data["id"])
+    linked_list.remove(node_1)
     assert linked_list.head is not None
     assert linked_list.head.data == node_3_data
     assert linked_list.head.next_node is not None
@@ -157,7 +159,8 @@ def test_removing_elements() -> None:
     assert linked_list.tail.previous_node is not None
     assert linked_list.tail.previous_node.data == node_3_data
 
-    linked_list.remove(target_key="id", target_value=node_4_data["id"])
+    node_4 = linked_list.find(target_key="id", target_value=node_4_data["id"])
+    linked_list.remove(node_4)
     assert linked_list.head is not None
     assert linked_list.head.data == node_3_data
     assert linked_list.head.next_node is None
@@ -165,16 +168,8 @@ def test_removing_elements() -> None:
     assert linked_list.tail.data == node_3_data
     assert linked_list.tail.previous_node is None
 
-    linked_list.remove(target_key="id", target_value=node_3_data["id"])
-    assert linked_list.head is None
-    assert linked_list.tail is None
-
-
-def test_removing_from_empty_list() -> None:
-    linked_list = LinkedList()
-
-    linked_list.remove(target_key="id", target_value="an_irrelevant_value")
-
+    node_3 = linked_list.find(target_key="id", target_value=node_3_data["id"])
+    linked_list.remove(node_3)
     assert linked_list.head is None
     assert linked_list.tail is None
 
@@ -239,8 +234,10 @@ def test_insert_after() -> None:
     linked_list.append(node_1_data)
     linked_list.append(node_2_data)
 
+    node_1 = linked_list.find(target_key="id", target_value=node_1_data["id"])
+
     # Normal insert scenario
-    linked_list.insert_after(data=node_3_data, needle_key="id", needle_value=node_1_data["id"])
+    linked_list.insert_after(data=node_3_data, node=node_1)
 
     assert linked_list.head.data == node_1_data
     second_node = linked_list.head.next_node
@@ -252,8 +249,10 @@ def test_insert_after() -> None:
     assert third_node.next_node is None
     assert linked_list.tail.data == node_2_data
 
+    node_2 = linked_list.find(target_key="id", target_value=node_2_data["id"])
+
     # Insert at tail scenario
-    linked_list.insert_after(data=node_4_data, needle_key="id", needle_value=node_2_data["id"])
+    linked_list.insert_after(data=node_4_data, node=node_2)
 
     assert linked_list.head.data == node_1_data
     second_node = linked_list.head.next_node
@@ -391,11 +390,11 @@ def test_clear() -> None:
     assert linked_list.tail is None
 
 
-def node_comparison_function(node):
-    return int(node.data["id"]) if node else 0
-
-
 def test_sorting() -> None:
+
+    def node_comparison_function(node):
+        return int(node.data["id"]) if node else 0
+
     node_1_data = {"id": 1}
     node_2_data = {"id": 2}
     node_3_data = {"id": 3}

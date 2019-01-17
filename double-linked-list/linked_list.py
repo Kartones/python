@@ -64,7 +64,6 @@ class LinkedList:
         new_head_node = LinkedListNode(data=data, next_node=self.head)
         if self.head is not None:
             self.head.previous_node = new_head_node
-            new_head_node.next_node = self.head
         else:
             self.tail = new_head_node
         self.head = new_head_node
@@ -76,25 +75,23 @@ class LinkedList:
         new_tail_node = LinkedListNode(data=data, previous_node=self.tail)
         if self.tail is not None:
             self.tail.next_node = new_tail_node
-            new_tail_node.previous_node = self.tail
         else:
             self.head = new_tail_node
         self.tail = new_tail_node
 
-    def insert_after(self, data: Dict, needle_key: str, needle_value: Any) -> None:
+    def insert_after(self, data: Dict, node: LinkedListNode) -> None:
         """
-        O(N) Insert new element after specified needle element
+        O(1) Insert new node after a specified one
         """
-        needle = self.find(target_key=needle_key, target_value=needle_value)
-        if not needle:
-            raise IndexError("needle not found")
+        if not node:
+            raise ValueError("Must specify an origin node to insert after")
 
-        new_node = LinkedListNode(data=data, previous_node=needle, next_node=needle.next_node)
-        if needle.next_node:
-            needle.next_node.previous_node = new_node
-        needle.next_node = new_node
+        new_node = LinkedListNode(data=data, previous_node=node, next_node=node.next_node)
+        if node.next_node:
+            node.next_node.previous_node = new_node
+        node.next_node = new_node
 
-        if self.tail == needle:
+        if self.tail == node:
             self.tail = new_node
 
     def find(self, target_key: str, target_value: Any) -> Optional["LinkedListNode"]:
@@ -112,29 +109,28 @@ class LinkedList:
 
         return current_node
 
-    def remove(self, target_key: str, target_value: Any) -> None:
+    def remove(self, target: LinkedListNode) -> None:
         """
-        O(N) Delete first occurrence of desired data
+        O(1) Delete first occurrence of desired data
         """
-        target_item = self.find(target_key=target_key, target_value=target_value)
-        if target_item is None:
-            return
+        if target is None:
+            raise ValueError("Must specify a node to remove")
 
-        previous_node = target_item.previous_node
-        next_node = target_item.next_node
+        previous_node = target.previous_node
+        next_node = target.next_node
 
         if previous_node is not None:
             previous_node.next_node = next_node
         if next_node is not None:
             next_node.previous_node = previous_node
 
-        if self.head == target_item:
+        if self.head == target:
             self.head = next_node
-        if self.tail == target_item:
+        if self.tail == target:
             self.tail = previous_node
 
-        target_item.previous_node = None
-        target_item.next_node = None
+        target.previous_node = None
+        target.next_node = None
 
     def reverse(self) -> None:
         """
@@ -191,14 +187,14 @@ class LinkedList:
             # because we'll first insert A, then B, so prepending B will make it end up before A
             node_b_previous_node = node_a_previous_node
 
-        self.remove(target_key=key, target_value=node_a.data[key])
-        self.remove(target_key=key, target_value=node_b.data[key])
+        self.remove(node_a)
+        self.remove(node_b)
         if node_b_previous_node:
-            self.insert_after(data=node_a.data, needle_key=key, needle_value=node_b_previous_node.data[key])
+            self.insert_after(data=node_a.data, node=node_b_previous_node)
         else:
             self.prepend(data=node_a.data)
         if node_a_previous_node:
-            self.insert_after(data=node_b.data, needle_key=key, needle_value=node_a_previous_node.data[key])
+            self.insert_after(data=node_b.data, node=node_a_previous_node)
         else:
             self.prepend(data=node_b.data)
 
