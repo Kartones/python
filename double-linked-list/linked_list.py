@@ -28,18 +28,18 @@ class LinkedList:
         self.head: Optional["LinkedListNode"] = None
         self.tail: Optional["LinkedListNode"] = None
 
-        self.__iteration_cursor: Optional[LinkedListNode] = self.head
+        self._iteration_cursor: Optional[LinkedListNode] = self.head
 
     def __iter__(self) -> "LinkedList":
-        self.__iteration_cursor = self.head
+        self._iteration_cursor = self.head
         return self
 
     def __next__(self) -> LinkedListNode:
-        if self.__iteration_cursor:
-            current_node = self.__iteration_cursor
+        if self._iteration_cursor:
+            current_node = self._iteration_cursor
         else:
             raise StopIteration
-        self.__iteration_cursor = self.__iteration_cursor.next_node
+        self._iteration_cursor = self._iteration_cursor.next_node
         return current_node
 
     def __repr__(self) -> str:
