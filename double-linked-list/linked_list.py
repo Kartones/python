@@ -30,6 +30,18 @@ class LinkedList:
 
         self.__iteration_cursor: Optional[LinkedListNode] = self.head
 
+    def __iter__(self) -> "LinkedList":
+        self.__iteration_cursor = self.head
+        return self
+
+    def __next__(self) -> LinkedListNode:
+        if self.__iteration_cursor:
+            current_node = self.__iteration_cursor
+        else:
+            raise StopIteration
+        self.__iteration_cursor = self.__iteration_cursor.next_node
+        return current_node
+
     def __repr__(self) -> str:
         nodes = []
 
@@ -42,18 +54,6 @@ class LinkedList:
             "H:{} T:{} ".format(self.head.data if self.head else "{}", self.tail.data if self.tail else "{}"),
             " , ".join(nodes)
         ])
-
-    def __iter__(self) -> "LinkedList":
-        self.__iteration_cursor = self.head
-        return self
-
-    def __next__(self) -> LinkedListNode:
-        if self.__iteration_cursor:
-            current_node = self.__iteration_cursor
-        else:
-            raise StopIteration
-        self.__iteration_cursor = self.__iteration_cursor.next_node
-        return current_node
 
     def prepend(self, data: Dict) -> None:
         """
