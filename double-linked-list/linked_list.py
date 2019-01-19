@@ -43,16 +43,9 @@ class LinkedList:
         return current_node
 
     def __repr__(self) -> str:
-        nodes = []
-
-        current_node = self.head
-        while current_node is not None:
-            nodes.append(str(current_node))
-            current_node = current_node.next_node
-
         return "\n".join([
-            "H:{} T:{} ".format(self.head.data if self.head else "{}", self.tail.data if self.tail else "{}"),
-            " , ".join(nodes)
+            "H:{} T:{}".format(self.head.data if self.head else "{}", self.tail.data if self.tail else "{}"),
+            " , ".join([str(item) for item in self])
         ])
 
     def prepend(self, data: Dict) -> None:
