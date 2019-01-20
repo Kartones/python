@@ -30,6 +30,7 @@
 
     <div class="container" style="margin-top: 42px">
       <h3>List {{ list_name }}</h3>
+      <a href="?">⬇️ Name</a> <a href="?order_by=state">⬇️ Priority</a>
       <div id="items-buttons">
         {% for item in items %}
             <button type="button" class="item btn btn-lg {{ item[2] }}" data-state="{{ item[1] }}"

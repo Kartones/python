@@ -10,6 +10,10 @@ from services.shopping_lists import ShoppingLists
 app = Flask(__name__)
 
 
+def item_sort_function(item):
+        return int(item[1])
+
+
 def authenticated(func):
     @wraps(func)
     def wrapped_f(*args, **kwds):
@@ -41,6 +45,10 @@ def list_items(list_name):
         return "", 204
     else:
         items = shopping_lists.get_items(list_name)
+        order_by = request.args.get("order_by")
+        if order_by == "state":
+            items = sorted(items, key=item_sort_function, reverse=True)
+
         return render_template("items.html", list_name=list_name, items=items)
 
 
