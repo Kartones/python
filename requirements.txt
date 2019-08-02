@@ -1,3 +1,6 @@
 pytest
 flake8
 mypy
+
+# for visual things like pygame code:
+# pygame

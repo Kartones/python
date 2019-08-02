@@ -20,18 +20,10 @@ class Grid():
             self.set_cell(coordinate[0], coordinate[1], 1)
 
     def advance_generation(self):
-        self._clear_linebuffer()
         for y in range(self.height):
             self._update_linebuffer(y)
             for x in range(self.width):
-                self.set_cell(x, y, self.cell_tick(x, y))
-
-    def cell_tick(self, x, y):
-        if self._count_adjacent_cells(x, y) == 3 or (
-           self.get_cell(x, y) == 1 and self._count_adjacent_cells(x, y) == 2):
-            return 1
-        else:
-            return 0
+                self.set_cell(x, y, self._cell_tick(x, y))
 
     def get_cell(self, x, y):
         return self.matrix[self.width*y + x] if (0 <= x < self.width) and (0 <= y < self.height) else 0
@@ -42,10 +34,18 @@ class Grid():
     def set_cell(self, x, y, value):
         self.matrix[self.width*y + x] = value
 
+    def _cell_tick(self, x, y):
+        # NOTE: Intended to only be called from advance_generation() as counting adjacents uses the linebuffer
+        neighbour_count = self._count_adjacent_cells(x, y)
+        if neighbour_count == 3 or (neighbour_count == 2 and self.get_cell(x, y) == 1):
+            return 1
+        else:
+            return 0
+
     def _update_linebuffer(self, y):
-        self.linebuffer_prev_index = self.linebuffer_index          # swap lines
+        self.linebuffer_prev_index = self.linebuffer_index  # swap lines
         self.linebuffer_index = (self.linebuffer_index + 1) % 2
-        for x in range(self.width):     # and update
+        for x in range(self.width):  # and update
             self.linebuffer[self.linebuffer_index][x] = self.get_cell(x, y)
 
     def _count_adjacent_cells(self, x, y):
@@ -63,8 +63,3 @@ class Grid():
 
     def _init_linebuffer(self, width):
         return [[0 for x in range(width)] for y in range(2)]
-
-    def _clear_linebuffer(self):
-        for x in range(self.width):
-            self.linebuffer[0][x] = 0
-            self.linebuffer[1][x] = 0

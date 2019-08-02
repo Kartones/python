@@ -14,17 +14,14 @@ Notes:
 - Resolution and fullscreen handled at the end of `game.py` (when the main instance is created)
 - To record the gif under Linux I used [Byzanz](https://www.maketecheasier.com/record-screen-as-animated-gif-ubuntu/)
 
-An additional, more optimized version using a linebuffer method is present at `grid_linebuffer.py` and is used by default by `game.py`.
+An additional, more optimized version using a linebuffer method is present at `grid_linebuffer.py` and is used by default.
 
 ## Setup
 
 Python (3.x) requirements:
 ```
 pygame
-mamba
-doublex
-expects
-doublex-expects
+pytest
 ```
 
 To run:
@@ -35,13 +32,5 @@ python3 game.py
 ## Testing
 
 ```
-mamba -f documentation test/*
-```
-Or simply:
-```
-mamba test/*
-```
-For constant feedback I like doing:
-```
-watch -n 1 mamba test/*
+pytest
 ```

@@ -33,14 +33,19 @@ class GameOfLife():
         self._draw_grid()
         pygame.display.flip()
 
+        while self.paused:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    sys.exit()
+            self._check_keyboard()
+
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     sys.exit()
             self._check_keyboard()
-            if not self.paused:
-                self._update_grid()
-                clock.tick(30)
+            self._update_grid()
+            clock.tick(30)
 
     def _draw_grid(self):
         for y in self.rows_range:
@@ -83,8 +88,8 @@ class GameOfLife():
 
 
 if __name__ == "__main__":
-    width = 120
-    height = 120
+    width = 150
+    height = 150
     fullscreen = False
     game = GameOfLife(width, height, fullscreen)
     game.start()
