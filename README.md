@@ -29,7 +29,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 * `\game-of-life-kata`: A coding kata. Inside-out TDD approach + PyGame "visualizer":
 
 ![sample game of life run](game-of-life-kata/doc/python_game_of_life_sample.gif)
-* `\pelican\plugins`: Plugins for the Pelican static site generator tool.
+* `\pelican\plugins`: Some plugins for the Pelican static site generator tool I've built.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
 * `\pelican\publisher`: Tool to allow post-processing of Pelican builds and optionally upload a post via FTP.
 * `\fire-effect.py`: Python/Pygame implementation of Doom PSX fire effect:
