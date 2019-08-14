@@ -105,7 +105,7 @@ def content_object_init(instance):
         # Chrome's native lazy load
         img["loading"] = "lazy"
 
-        # Good pratice
+        # Good practice
         if img.get("alt", "") == img["src"]:
             img["alt"] = ""
 
