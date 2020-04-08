@@ -102,7 +102,7 @@ def content_object_init(instance):
         img["width"] = img.get("width", width)
         img["height"] = img.get("height", height)
 
-        # Chrome's native lazy load
+        # Chrome 77+ or Firefox 75+ native lazy load
         img["loading"] = "lazy"
 
         # Good practice
