@@ -47,7 +47,9 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 ![Doom PSX fire effect in pygame](doc/fire-effect.png)
 
-* `\flappy-kirby`: Pygame Zero Flappy Bird game clone (with some classic graphics).
+* `\flappy-kirby`: Pygame Zero Flappy Bird game clone (with some classic graphics):
+
+![Flappy Kirby screenshot](doc/flappy-kirby.png)
 
 * `\pic-to-png`: Exporter from Oper Soft's old MS-DOS games .PIC files to .PNG images. More info at [this blogpost](https://blog.kartones.net/post/opera-soft-pic-to-png-exporter/) & [part 2](https://blog.kartones.net/post/mutan-zone-sprite-exporter-wip/):
 
@@ -57,4 +59,4 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 * `\transarctica-battles`: A prototype of re-imagining of the battles section of the MS-DOS and AMIGA game [Transarctica](https://en.wikipedia.org/wiki/Transarctica). Also an experiment with Pygame to learn about screen resizing. Totally WIP.
 
-![Transarctica Battles](doc/transarctica-battles.png)
+![Transarctica Battles screenshot](doc/transarctica-battles.png)
