@@ -16,6 +16,9 @@ import requests
 from pelican import signals
 
 
+WEBP_SUPPORT_ENABLED = True
+
+
 class ImageCache():
 
     CACHE_FOLDER_NAME = "img_cache"
@@ -87,27 +90,40 @@ def content_object_init(instance):
     content = instance._content
     soup = BeautifulSoup(content, "html.parser")
 
+    gif_extension = ".gif"
+
     for img in soup(["img"]):
-        # Text or similar containing a `<img>` tag
+        # Skip false positives (text or similar containing a `<img>` tag)
         if not img.get("src"):
             continue
 
-        # Don't touch base64 encoded images
+        # Skip base64 encoded images
         img_path, _ = os.path.split(img["src"])
         if img_path.startswith("data:image"):
             continue
 
-        # Always define width & height
+        # Always define width & height (speeds up rendering)
         width, height = image_cache.get_image_width_and_height(img["src"])
         img["width"] = img.get("width", width)
         img["height"] = img.get("height", height)
 
-        # Chrome 77+ or Firefox 75+ native lazy load
+        # For those browsers that support native lazy load
         img["loading"] = "lazy"
 
-        # Good practice
+        # It's better to not have alt than to set it to the src
         if img.get("alt", "") == img["src"]:
             img["alt"] = ""
+
+        # <picture> and webp support (for jpgs and pngs)
+        # note that this plugin does *not* convert to webp
+        # how to convert to webp: https://gist.github.com/Kartones/457fda60da05bb55224d#webp
+        if WEBP_SUPPORT_ENABLED and not img["src"].endswith(gif_extension):
+            source_tag = soup.new_tag("source")
+            source_tag["srcset"] = img["src"][: img["src"].rfind(".")] + ".webp"
+            source_tag["type"] = "image/webp"
+            picture_tag = soup.new_tag("picture")
+            img.wrap(picture_tag)
+            img.insert_before(source_tag)
 
         # Old MCE cleanup
         if img.get("mce_src"):

@@ -24,7 +24,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 0   /media/kartones/pre1/test 2/blablabla
 0   /media/kartones/pre1/test.1/blablabla
 ```
-* `\pelican\plugins`: Some plugins for the Pelican static site generator tool I've built.
+* `\pelican\plugins`: Some plugins I've built for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
 * `\pelican\publisher`: Tool to allow post-processing of Pelican builds and optionally upload a post via FTP.
 * `\shopping-cart-with-discounts`: Tiny implementation of a shopping cart with an extensible discounts system.
