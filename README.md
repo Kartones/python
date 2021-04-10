@@ -51,6 +51,8 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 ![Flappy Kirby screenshot](doc/flappy-kirby.png)
 
+* `\imdb-random-name`: Obtain a random movie name, using IMDB datasets. Includes a fetch script that retrieves and prepares the latest data.
+
 * `\pic-to-png`: Exporter from Oper Soft's old MS-DOS games .PIC files to .PNG images. More info at [this blogpost](https://blog.kartones.net/post/opera-soft-pic-to-png-exporter/) & [part 2](https://blog.kartones.net/post/mutan-zone-sprite-exporter-wip/):
 
 ![Mutan Zone main screen](doc/pic_2_png_mutan_zone.png) ![Abadia del Crimen main screen](doc/pic_2_png_abadia_del_crimen.png)

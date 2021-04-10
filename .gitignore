@@ -6,3 +6,7 @@ urls.txt
 twitter-purge/run.sh
 *.cache*
 *.mypy_cache*
+
+/imdb-random-name/*.gz
+/imdb-random-name/*.tsv
+/imdb-random-name/*.csv
