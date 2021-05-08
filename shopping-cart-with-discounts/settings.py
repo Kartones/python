@@ -22,6 +22,8 @@ AVAILABLE_PRODUCTS = [
 # NOTE: If applying multiple discounts to the same product, results might not be correct ones.
 #       e.g. BuyNGetOneFreeDiscount & BulkPurchasePriceDiscount to the same product, if amount is same in both
 #       would cause bulk purchase one to count the free item as if were paid.
+#       This could be solved by making discounts exclusive: e.g. each discount reports if applied and if so, we stop
+#       checking further discounts.
 DISCOUNTS = [
     BuyNGetOneFreeDiscount(product_code=PRODUCT_CODE_A, amount=2),
     BulkPurchasePriceDiscount(product_code=PRODUCT_CODE_B, amount=3, reduced_price=900),

@@ -10,9 +10,9 @@ class Discounts():
         self.discounts = discounts
         self.available_products = available_products
 
-        discounts_count = len(self.discounts) - 1
+        discounts_count = len(self.discounts)
         for index, discount in enumerate(self.discounts):
-            if index < discounts_count:
+            if index < (discounts_count - 1):
                 discount.set_next(self.discounts[index+1])
 
     def calculate_total_discount(self, products: Dict[str, int]) -> int:
