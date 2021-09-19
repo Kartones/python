@@ -3,6 +3,7 @@ urls.txt
 *__pycache__*
 */config.py
 */secrets.py
+*/*.secret
 twitter-purge/run.sh
 *.cache*
 *.mypy_cache*
