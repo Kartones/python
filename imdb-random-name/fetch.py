@@ -29,8 +29,6 @@ class Fetch():
             1: averageRating -> float
     """
 
-    EXTRACT_COMMAND = "tar –xzf {filename}"
-
     # Note: doesn't includes header row
     OUTPUT_FILE = "imdb-titles.csv"
 
