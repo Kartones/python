@@ -3,6 +3,8 @@ from typing import (Dict, List, Optional)
 
 from product import Product
 
+# Based on the Chain-of-responsibility pattern: https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern
+
 
 class Discounts():
 
