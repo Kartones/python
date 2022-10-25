@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 LABEL title "Assorted Python 3 code"
 LABEL maintainer "Diego / Kartones"
