@@ -13,7 +13,7 @@ A small web application to manage shopping lists. Very simple, file-based, quick
 - To edit a list, just click it from the lists view and you will enter the items view
 - Once viewing items, click/tap them one or more times to change their state to:
     - `Grey`: No need to buy right now ("inactive")
-    - `Orange`: Need to buy ("wanted")
+    - `Yellow`: Need to buy ("wanted")
     - `Red`: Important to buy ("highly wanted")
     - `Black`: Remove from list. Will disappear upon changing list or reloading, except if you tap and change its state again
 - You can also create new items from the item view at the bottom, just fill the textbox with the item name and press the `+` button
