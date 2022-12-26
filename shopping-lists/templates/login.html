@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
 <body>
-    <h1>Authenticate</h1>
-    <form action="{{ base_url_path }}login" method="POST" class="form-inline">
-        <input type="password" name="pass" size="24" autofocus="autofocus" class="form-control mr-sm-2" />
-        <input type="submit" value="Login" class="btn btn-outline-success my-2 my-sm-0" />
-    </form>
+    <div style="padding: 2%">
+      <h1>Authenticate</h1>
+      <form action="{{ base_url_path }}login" method="POST">
+        <div class="mb-3">
+          <input type="password" name="pass" size="24" autofocus="autofocus" class="form-control" />
+        </div>
+          <input type="submit" value="Login" class="btn btn-outline-success" />
+      </form>
+    </div>
 </body>
 </html>
