@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 def item_sort_function(item):
-        return int(item[1])
+    return int(item[1])
 
 
 def authenticated(func):
@@ -24,7 +24,7 @@ def authenticated(func):
         if can_pass:
             return func(*args, **kwds)
         else:
-            return redirect("/login", code=302)
+            return redirect("{}login".format(config.BASE_URL_PATH), code=302)
     return wrapped_f
 
 
@@ -32,7 +32,7 @@ def authenticated(func):
 @authenticated
 def lists():
     lists = ShoppingLists(config).get_all_lists()
-    return render_template("lists.html", lists=lists)
+    return render_template("lists.html", lists=lists, base_url_path=config.BASE_URL_PATH)
 
 
 @app.route("/items/<list_name>", methods=["GET", "POST"])
@@ -40,7 +40,8 @@ def lists():
 def list_items(list_name):
     shopping_lists = ShoppingLists(config)
     if request.method == "POST":
-        items_with_state = [key for key in request.form.keys()][0].split(",")
+        form_data = [key for key in request.form.keys()]
+        items_with_state = form_data[0].split(",") if form_data else []
         shopping_lists.save_list(list_name, items_with_state)
         return "", 204
     else:
@@ -49,22 +50,22 @@ def list_items(list_name):
         if order_by == "state":
             items = sorted(items, key=item_sort_function, reverse=True)
 
-        return render_template("items.html", list_name=list_name, items=items)
+        return render_template("items.html", list_name=list_name, items=items, base_url_path=config.BASE_URL_PATH)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         if request.form.get("pass") == config.PASS:
-            response = make_response(redirect("/", code=302))
+            response = make_response(redirect(config.BASE_URL_PATH, code=302))
             # 1 year age
             response.set_cookie(key=config.COOKIE_KEY, value=config.COOKIE_PASS, max_age=31536000)
             return response
         else:
-            return render_template("login.html")
+            return render_template("login.html", base_url_path=config.BASE_URL_PATH)
     else:
-        return render_template("login.html")
+        return render_template("login.html", base_url_path=config.BASE_URL_PATH)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=config.DEBUG, host=config.HOST_IP)

@@ -1,0 +1,17 @@
+version: "2"
+services:
+  shopping-lists:
+    build:
+      args:
+        uid: ${UID}
+        gid: ${GID}
+      context: ..
+      dockerfile: build/Dockerfile
+    image: shopping-lists
+    volumes:
+      - ..:/code
+      - ..:/opt/shopping-lists
+    working_dir: /code
+    command: "bash -c 'exec python3 -m app'"
+    ports:
+        - "127.0.0.1:5000:5000"

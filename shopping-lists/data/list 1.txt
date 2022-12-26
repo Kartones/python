@@ -1,3 +1,0 @@
-a product 0
-another product 1
-a highly desired product 2
