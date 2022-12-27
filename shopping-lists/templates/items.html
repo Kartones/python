@@ -43,30 +43,13 @@
       window.timeoutHandler = null;
 
       function toggleItem(e) {
+        const states = ["btn-default", "btn-warning", "btn-danger", "btn-dark"];
         const state = parseInt(e.target.dataset.state, 10);
+        const newState = (state+1) % 4;
 
-        switch(state) {
-          case 0:
-              e.target.dataset.state = 1;
-              e.target.classList.add("btn-warning");
-              e.target.classList.remove("btn-default");
-          break;
-          case 1:
-              e.target.dataset.state = 2;
-              e.target.classList.add("btn-danger");
-              e.target.classList.remove("btn-warning");
-          break;
-          case 2:
-              e.target.dataset.state = 3;
-              e.target.classList.add("btn-dark");
-              e.target.classList.remove("btn-danger");
-          break;
-          case 3:
-              e.target.dataset.state = 0;
-              e.target.classList.add("btn-default");
-              e.target.classList.remove("btn-dark");
-          break;
-        }
+        e.target.classList.add(states[newState]);
+        e.target.classList.remove(states[state]);
+        e.target.dataset.state = newState;
 
         if (window.timeoutHandler != null) {
           clearTimeout(window.timeoutHandler);
@@ -81,14 +64,14 @@
       };
 
       function saveList() {
-        let items = [];
+        const items = [];
         document.querySelectorAll("#items-buttons button").forEach(item => {
           const state = parseInt(item.dataset.state, 10);
           if (state !== 3) {
-            items.push(item.textContent + " " + state);
+            items.push(`${item.textContent} ${state}`);
           }
         })
-        fetch("{{ base_url_path }}items/" + encodeURIComponent("{{ list_name }}"), {
+        fetch(`{{ base_url_path }}items/${encodeURIComponent("{{ list_name }}")}`, {
           body: encodeURIComponent(items),
           method: "POST",
           headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"}
@@ -99,8 +82,8 @@
         const newItemName = document.getElementById("newItemName").value.trim().toLowerCase();
         if (newItemName.length > 0 && !itemExists(newItemName)) {
           document.getElementById("items-buttons").insertAdjacentHTML(
-            "beforeend", "<button type=\"button\" class=\"item btn btn-lg btn-warning\" data-state=\"1\" data-key=\"" +
-            newItemName + "\">" + newItemName + "</button>"
+            "beforeend",
+            `<button type="button" class="item btn btn-lg btn-warning" data-state="1" data-key="${newItemName}">${newItemName}</button>`
           );
 
           document.getElementById("newItemName").value = "";
@@ -109,18 +92,26 @@
       };
 
       function itemExists(itemName) {
-        return !!document.querySelector("#items-buttons button[data-key=\"" + itemName + "\"]");
+        return !!document.querySelector(`#items-buttons button[data-key="${itemName}"]`);
       }
 
-      document.getElementById("items-buttons").onclick = function(eventData) {
-        if (eventData.target.nodeName === "BUTTON") {
-          toggleItem(eventData);
-          return false;
-        }
-        return;
-      };
+      window.addEventListener('load', () => {
+        document.getElementById("items-buttons").onclick = (eventData) => {
+          if (eventData.target.nodeName === "BUTTON") {
+            toggleItem(eventData);
+            return false;
+          }
+          return;
+        };
 
-      document.getElementById("addNewItemButton").onclick = addNewItemToList;
+        document.getElementById("addNewItemButton").onclick = addNewItemToList;
+
+        document.getElementById("newItemName").addEventListener("keypress", (eventData) => {
+          if (eventData.keyCode === 13) {
+            addNewItemToList();
+          }
+        }, false);
+      });
     </script>
 </body>
 </html>

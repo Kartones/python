@@ -34,17 +34,15 @@
     </div>
 
     <script type="text/javascript">
-      function navigate(eventData) {
-        window.location = "{{ base_url_path }}items/" + encodeURIComponent(eventData.target.dataset.listname);
-      };
-
-      document.getElementById("list-buttons").onclick = function(eventData) {
-        if (eventData.target.nodeName === "BUTTON") {
-          navigate(eventData);
-          return false;
-        }
-        return;
-      };
+      window.addEventListener('load', () => {
+        document.getElementById("list-buttons").onclick = (eventData) => {
+          if (eventData.target.nodeName === "BUTTON") {
+            window.location = `{{ base_url_path }}items/${encodeURIComponent(eventData.target.dataset.listname)}`;
+            return false;
+          }
+          return;
+        };
+      });
     </script>
 </body>
 </html>
