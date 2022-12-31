@@ -22,7 +22,12 @@ A small web application to manage shopping lists. Very simple, file-based, quick
 
 Just run `make run` and it will tell you the url to access the development version once the container is ready.
 
-## Production
+### CSS
+
+CSS stylesheet used is [Bootstrap](https://getbootstrap.com/) with tiny tweaks, and most importantly, with all unused CSS removed via [PurgeCSS](https://purgecss.com/CLI.html). Kept the original full css file (in `static/style.original.css`) but unused from the templates.
+
+
+## Deployment
 
 **Beware of default config values, make sure to change them**. That said, up to you how to deploy it.
 
