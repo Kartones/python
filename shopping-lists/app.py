@@ -41,8 +41,8 @@ def list_items(list_name):
     shopping_lists = ShoppingLists(config)
     if request.method == "POST":
         form_data = [key for key in request.form.keys()]
-        items_with_state = form_data[0].split(",") if form_data else []
-        shopping_lists.save_list(list_name, items_with_state)
+        action, item_name = form_data[0].split(config.SEPARATOR) if form_data else (None, None)
+        shopping_lists.save_list_item_action(list_name, item_name, action)
         return "", 204
     else:
         items = shopping_lists.get_items(list_name)
@@ -50,7 +50,12 @@ def list_items(list_name):
         if order_by == "state":
             items = sorted(items, key=item_sort_function, reverse=True)
 
-        return render_template("items.html", list_name=list_name, items=items, base_url_path=config.BASE_URL_PATH)
+        return render_template(
+            "items.html",
+            list_name=list_name, items=items,
+            base_url_path=config.BASE_URL_PATH,
+            separator=config.SEPARATOR
+        )
 
 
 @app.route("/login", methods=["GET", "POST"])

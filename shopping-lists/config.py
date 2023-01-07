@@ -1,4 +1,7 @@
 
+# for actions, and for separating item name from item state inside lists
+SEPARATOR = "|"
+
 # for subfolder-based urls: /shopping-lists/
 BASE_URL_PATH = "/"
 

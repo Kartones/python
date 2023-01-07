@@ -40,10 +40,9 @@
     </footer>
 
     <script type="text/javascript">
-      window.timeoutHandler = null;
-
       function toggleItem(e) {
         const states = ["btn-default", "btn-warning", "btn-danger", "btn-dark"];
+        const actions = ["c", "h", "d", "u"];
         const state = parseInt(e.target.dataset.state, 10);
         const newState = (state+1) % 4;
 
@@ -51,43 +50,28 @@
         e.target.classList.remove(states[state]);
         e.target.dataset.state = newState;
 
-        if (window.timeoutHandler != null) {
-          clearTimeout(window.timeoutHandler);
-        }
-        window.timeoutHandler = setTimeout(applyStateChange, 1000);
+        saveItemAction(e.target.dataset.key, actions[state]);
       };
 
-      function applyStateChange() {
-        clearTimeout(window.timeoutHandler);
-        window.timeoutHandler = null;
-        saveList();
-      };
-
-      function saveList() {
-        const items = [];
-        document.querySelectorAll("#items-buttons button").forEach(item => {
-          const state = parseInt(item.dataset.state, 10);
-          if (state !== 3) {
-            items.push(`${item.textContent} ${state}`);
-          }
-        })
+      function saveItemAction(itemName, action) {
         fetch(`{{ base_url_path }}items/${encodeURIComponent("{{ list_name }}")}`, {
-          body: encodeURIComponent(items),
+          body: encodeURIComponent(`${action}{{separator}}${itemName}`),
           method: "POST",
           headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"}
         });
-      };
+      }
 
       function addNewItemToList() {
         const newItemName = document.getElementById("newItemName").value.trim().toLowerCase();
         if (newItemName.length > 0 && !itemExists(newItemName)) {
           document.getElementById("items-buttons").insertAdjacentHTML(
             "beforeend",
-            `<button type="button" class="item btn btn-lg btn-warning" data-state="1" data-key="${newItemName}">${newItemName}</button>`
+            `<button type="button" class="item btn btn-warning" data-state="1" data-key="${newItemName}">${newItemName}</button>`
           );
 
           document.getElementById("newItemName").value = "";
-          saveList();
+
+          saveItemAction(newItemName, "c");
         }
       };
 
