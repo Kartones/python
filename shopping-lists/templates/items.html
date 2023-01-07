@@ -26,7 +26,7 @@
       </div>
       <div id="items-buttons">
         {% for item in items %}
-            <button type="button" class="item btn btn-lg {{ item[2] }}" data-state="{{ item[1] }}"
+            <button type="button" class="item btn {{ item[2] }}" data-state="{{ item[1] }}"
                 data-key="{{ item[0] }}">{{ item[0] }}</button>
         {% endfor %}
       </div>
