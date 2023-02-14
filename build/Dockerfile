@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11
 
 LABEL title "Assorted Python 3 code"
 LABEL maintainer "Diego / Kartones"
@@ -17,7 +17,12 @@ RUN getent passwd $uid || useradd -m -u $uid -g $gid python-assorted
 
 RUN chown -R $uid:$gid /usr/local
 
+RUN apt-get clean && apt-get -y update && apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev libportmidi-dev libjpeg-dev python3-setuptools python3-dev python3-numpy
+
 USER $uid
 
 COPY requirements.txt /code/requirements.txt
+
+
+RUN pip install --upgrade pip
 RUN pip install -r /code/requirements.txt
