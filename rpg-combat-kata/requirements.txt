@@ -1,4 +1,4 @@
 mamba==0.11.2
-doublex==1.9.3
+doublex==1.9.6.1
 expects==0.9.0
 doublex-expects==0.7.1
