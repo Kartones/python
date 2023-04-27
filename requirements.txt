@@ -6,4 +6,4 @@ mypy==1.2.0
 pygame==2.3.0
 
 pytest==7.3.1
-requests==2.28.2
+requests==2.29.0
