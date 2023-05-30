@@ -3,7 +3,6 @@ FROM python:3.11
 LABEL title "Assorted Python 3 code"
 LABEL maintainer "Diego / Kartones"
 LABEL url "https://kartones.net"
-LABEL twitter "@kartones"
 
 # Define environment vars to expose to container here
 # ENV <key> <value>

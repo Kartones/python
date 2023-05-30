@@ -24,6 +24,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 0   /media/kartones/pre1/test 2/blablabla
 0   /media/kartones/pre1/test.1/blablabla
 ```
+* `\markov-model`: An implementation of a simple Markov model (a Markov Chain) for generating variants of sentences based on a text.
 * `\mastodon-purge`: Script to delete your Mastodon toots older than X days (5 with sample config). Best setup as a cron job to run hourly or daily.
 * `\pelican\plugins`: Some plugins I've built for the Pelican static site generator tool.
 * `\pelican\blogengine_to_pelican.py`: Tool to migrate from BlogEngine.Net to Pelican (posts and pages).
