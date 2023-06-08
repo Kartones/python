@@ -16,6 +16,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 ### Miscellaneous
 * `\double-linked-list`: A Python implementation of a double linked list, with sorting, reversing, item flipping and inserting at specific position (by data).
+* `\imports`: A tiny reminder of how Python imports work in their common variants: import from file in same folder, from sub-folder, and from sibling folder.
 * `\list_search.py`: Old search prototype for a command-line provided string in all txt files of folder where script is launched. Sample text files format:
 ```
 0   /media/kartones/pre1/test 1/blablabla
