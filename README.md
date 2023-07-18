@@ -34,6 +34,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 * `\trello-backup`: **(No longer works)** Script to export your Trello boards as json files, plus all attachments. One folder per board with data inside.
 * `\twitter-purge`: Script to delete your Twitter tweets older than X days (5 with sample config). Best setup as a cron job to run hourly or daily.
 * `\weather-email`: **(No longer works)** Small script that fetches Madrid's current weather info and sends it via email. Perfect to be setup as a cron job at 7AM to remind me daily of the weather before I head out for work.
+* `\youtube-summarizer`: Run with an argument specifying either a Youtube URL or a Youtube video id, and it will fetch the video transcript and generate a short summary (via ChatGPT).
 
 ### Games & Gaming Related
 
