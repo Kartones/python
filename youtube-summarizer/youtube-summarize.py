@@ -1,3 +1,5 @@
+import sys
+
 import openai
 from youtube_transcript_api import (YouTubeTranscriptApi, NoTranscriptFound)
 
@@ -8,13 +10,13 @@ MAX_VIDEO_LENGTH_MINUTES = 20
 SUMMARY_WORDS = 200
 
 
-def format_transcript_as_raw_text(transcript):
-    max_length = 60*MAX_VIDEO_LENGTH_MINUTES
+def format_transcript_as_raw_text(transcript, max_video_length_minutes):
+    max_length = 60*max_video_length_minutes
     content = []
 
     last_timestamp = transcript[-1]["start"]
     if last_timestamp > max_length:
-        print(f"> Video is longer than {MAX_VIDEO_LENGTH_MINUTES} minutes, unsuitable for GPT. Aborting")
+        print(f"> Video is longer than {max_video_length_minutes} minutes, unsuitable for GPT. Aborting")
         return ""
 
     for line in transcript:
@@ -78,9 +80,14 @@ if __name__ == "__main__":
     if video_id.startswith("https://www.youtube.com/watch"):
         video_id = video_id.split("v=")[1].split("&")[0]
 
+    if len(sys.argv) == 3:
+        max_video_length_minutes = int(sys.argv[2])
+    else:
+        max_video_length_minutes = MAX_VIDEO_LENGTH_MINUTES
+
     transcript = download_english_transcript(video_id)
+    transcript = format_transcript_as_raw_text(transcript, max_video_length_minutes)
     if len(transcript) > 0:
-        transcript = format_transcript_as_raw_text(transcript)
         save_content_to_file(transcript, f"{video_id}_transcript")
         summary = summarize_transcript(transcript)
         save_content_to_file(summary, f"{video_id}_summary")
