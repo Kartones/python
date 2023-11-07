@@ -50,12 +50,12 @@ Content: @@@{transcript}@@@
     # model = "gpt-3.5-turbo"
     model = "gpt-3.5-turbo-16k"
     messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
+    completion = openai.chat.completions.create(
         model=model,
         messages=messages,
         temperature=temperature,
     )
-    result = response.choices[0].message["content"]
+    result = completion.choices[0].message.content
 
     return result
 
