@@ -11,5 +11,6 @@ twitter-purge/run.sh
 /imdb-random-name/*.gz
 /imdb-random-name/*.tsv
 /imdb-random-name/*.csv
+/pic-to-png/samples/*
 
 !/shopping-lists/config.py

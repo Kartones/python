@@ -58,7 +58,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 * `\pic-to-png`: Exporter from Oper Soft's old MS-DOS games .PIC files to .PNG images. More info at [this blogpost](https://blog.kartones.net/post/opera-soft-pic-to-png-exporter/) & [part 2](https://blog.kartones.net/post/mutan-zone-sprite-exporter-wip/):
 
-![Mutan Zone main screen](doc/pic_2_png_mutan_zone.png) ![Abadia del Crimen main screen](doc/pic_2_png_abadia_del_crimen.png)
+![Mutan Zone main screen](doc/pic_2_png_mutan_zone.png) ![Abadia del Crimen main screen](doc/pic_2_png_abadia_del_crimen.png) ![Corsarios main screen (EGA)](pic-to-png/img/corsarios_EGA.png)
 
 * `\rpg-combat-kata`: A coding kata. I went for an inside-out TDD approach, building only the minimal needed functionality.
 
