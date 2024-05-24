@@ -15,6 +15,8 @@ And then from inside the Python 3.7 container install and run whatever you want.
 
 
 ### Miscellaneous
+* `\bluesky-purge`: Script to delete your BlueSky posts older than X days (5 with sample config). Best setup as a cron job to run hourly or daily.
+
 * `\double-linked-list`: A Python implementation of a double linked list, with sorting, reversing, item flipping and inserting at specific position (by data).
 * `\imports`: A tiny reminder of how Python imports work in their common variants: import from file in same folder, from sub-folder, and from sibling folder.
 * `\list_search.py`: Old search prototype for a command-line provided string in all txt files of folder where script is launched. Sample text files format:
@@ -59,8 +61,7 @@ And then from inside the Python 3.7 container install and run whatever you want.
 * `\pic-to-png`: Exporter from Oper Soft's old MS-DOS games .PIC files to .PNG images. More info at [this blogpost](https://blog.kartones.net/post/opera-soft-pic-to-png-exporter/) & [part 2](https://blog.kartones.net/post/mutan-zone-sprite-exporter-wip/):
 
 ![Mutan Zone main screen](doc/pic_2_png_mutan_zone.png) ![Abadia del Crimen main screen](doc/pic_2_png_abadia_del_crimen.png) ![Corsarios main screen (EGA)](pic-to-png/img/corsarios_EGA.png)
-
-* `\rpg-combat-kata`: A coding kata. I went for an inside-out TDD approach, building only the minimal needed functionality.
+side-out TDD approach, building only the minimal needed functionality.
 
 * `\transarctica-battles`: A prototype of re-imagining of the battles section of the MS-DOS and AMIGA game [Transarctica](https://en.wikipedia.org/wiki/Transarctica). Also an experiment with Pygame to learn about screen resizing. Totally WIP.
 
