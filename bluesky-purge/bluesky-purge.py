@@ -30,7 +30,11 @@ def _fetch_messages_feed(client, profile):
 def _purge_old_messages(client, feed_view):
     max_keep_date = datetime.today() + timedelta(-config.DAYS_TO_KEEP)
     for message in feed_view:
-        created_at = datetime.fromisoformat(message.post.record.created_at)
+        post_date = message.post.record.created_at
+        if post_date.endswith("Z"):
+            post_date = post_date[:-1] + "+00:00"
+
+        created_at = datetime.fromisoformat(post_date)
         if created_at < max_keep_date.replace(tzinfo=pytz.UTC):
             print(f"Deleting message: {message.post.uri}")
             deleted = client.delete_post(message.post.uri)
