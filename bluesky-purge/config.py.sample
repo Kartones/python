@@ -1,0 +1,4 @@
+# Need to define an app password: https://bsky.app/settings/app-passwords
+USER_HANDLE = ""
+APP_PASSWORD = ""
+DAYS_TO_KEEP = 5

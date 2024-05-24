@@ -7,3 +7,8 @@ pygame==2.5.2
 
 pytest==8.2.1
 requests==2.32.2
+
+pytz==2024.1
+
+# For bluesky-purge
+atproto==0.0.47
