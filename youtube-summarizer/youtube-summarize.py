@@ -45,8 +45,8 @@ Generate a summary of at minimum {SUMMARY_WORDS} words from the content below, d
 
 Content: @@@{transcript}@@@
 """
-    # https://platform.openai.com/docs/models/gpt-3-5-turbo
-    model = "gpt-3.5-turbo"
+    # https://platform.openai.com/docs/models/
+    model = "gpt-4o-mini"
     messages = [{"role": "user", "content": prompt}]
     completion = openai.chat.completions.create(
         model=model,
