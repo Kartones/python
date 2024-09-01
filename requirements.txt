@@ -11,4 +11,4 @@ requests==2.32.3
 pytz==2024.1
 
 # For bluesky-purge
-atproto==0.0.50
+atproto==0.0.51
