@@ -5,10 +5,10 @@ mypy==1.11.2
 # https://github.com/pygame/pygame/issues/3522
 pygame==2.6.0
 
-pytest==8.3.2
+pytest==8.3.3
 requests==2.32.3
 
-pytz==2024.1
+pytz==2024.2
 
 # For bluesky-purge
-atproto==0.0.52
+atproto==0.0.54
