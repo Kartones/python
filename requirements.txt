@@ -10,5 +10,5 @@ requests==2.32.3
 
 pytz==2024.2
 
-# For bluesky-purge
+# For bluesky-purge, requires python <3.13
 atproto==0.0.54
