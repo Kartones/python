@@ -26,7 +26,7 @@ class Discounts():
 class BaseDiscount(ABC):
 
     def __init__(self) -> None:
-        self.next_discount = None  # type: Optional["BaseDiscount"]
+        self.next_discount: Optional["BaseDiscount"] = None
 
     def set_next(self, discount: "BaseDiscount") -> None:
         self.next_discount = discount

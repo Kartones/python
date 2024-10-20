@@ -2,7 +2,7 @@ from discounts import (BulkPurchasePriceDiscount, BuyNGetOneFreeDiscount)
 from product import Product
 
 
-# NOTE: All prices in euro cents
+# NOTE: All prices in euro cents (1.00€ = 100 "euro cents"), avoid using floating point numbers for currency
 
 # Define here the product codes
 PRODUCT_CODE_A = "PRODUCT CODE #1"
@@ -18,17 +18,12 @@ AVAILABLE_PRODUCTS = [
 ]
 
 # Define here which discounts are active
-# NOTE: order matters, discounts are applied according to this list order
-# NOTE: If applying multiple discounts to the same product, results might not be correct ones.
-#       e.g. BuyNGetOneFreeDiscount & BulkPurchasePriceDiscount to the same product, if amount is same in both
-#       would cause bulk purchase one to count the free item as if were paid.
-#       This could be solved by making discounts exclusive: e.g. each discount reports if applied and if so, we stop
-#       checking further discounts.
+# Note that order matters, although each discount is independant from the others
 DISCOUNTS = [
     BuyNGetOneFreeDiscount(product_code=PRODUCT_CODE_A, amount=2),
     BulkPurchasePriceDiscount(product_code=PRODUCT_CODE_B, amount=3, reduced_price=900),
     # This discount does nothing, but as the system needs at least one configured,
-    # if don't want any discount active then use this
+    # if don't want any discount active, or for testing, can use it
     # NoDiscount()
 ]
 
