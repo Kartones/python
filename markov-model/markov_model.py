@@ -1,96 +1,104 @@
 """
 Given a list of sentences, the markov model takes note of how often it witnesses a transition from one word to another.
 
-Frequency is represented by the number of times that a word is stored in the list of possible next words
-for a given word. This wastes space but it is a very simple implementation.
-
-SOLUTION NOTE:
-While using sets for the values removes some repetition, in order to really save memory the way to go would be to build
-a word dictionary and make the model store dictionary indexes, so each word really appears just once and the sets
-contain only integers (instead of strings as now)
+Implementation:
+- Uses a symbol dictionary to save memory (only one instance of each word)
+- Only words seen as sentence starts are used to start a sentence
+- Does not take into account weights for sentence starts
+- Takes into account weights for transitions and for sentence ends
 
 """
 from collections import defaultdict
-from random import choice
-from typing import (Dict, List, Optional)
-
-# The model stores which words are used as sentence start and end delimiters.
-# It will only begin a sentence with a start word, and will end if picking an end word even if not yet reached the
-# desired maximum sentence length.
-SENTENCE_START_DELIMITER = "@@"
-SENTENCE_END_DELIMITER = "||"
+from random import choice, sample
+from typing import (Dict, List, Set)
 
 
-def build_model(sentences: List[str]) -> Dict:
-    model = defaultdict(list)  # type: Dict[str, list]
-
-    for sentence in sentences:
-        words = sentence.split(" ")
-        if len(words) < 2:
-            raise ValueError("Sentences must be at least two words!")
-        for index, word in enumerate(words):
-            # TODO: handle case of 1-word sentences
-            if index == len(words) - 1:
-                if SENTENCE_END_DELIMITER not in model[word]:
-                    model[word].append(SENTENCE_END_DELIMITER)
-                continue
-
-            if index == 0 and SENTENCE_START_DELIMITER not in model[word]:
-                model[word].append(SENTENCE_START_DELIMITER)
-
-            # explicitly removing direct repetitions, as `love -> love` in `Do what you love, love what you do`
-            if words[index+1] != word:
-                model[word].append(words[index+1])
-
-    return model
+SENTENCE_END_DELIMITER = "."
 
 
-def build_markov_sentence(model: Dict[str, List], max_words: int) -> str:
-    words = do_build_markov_sentence(current_word=None, model=model, word_count=0, max_words=max_words)
-    return " ".join(words)
+class MarkovModel:
 
+    def __init__(self):
+        self.dictionary: Dict[int, str] = {}
+        self.transitions : Dict[int, Dict[int, int]] = {}
+        self.sentence_start_words: Set[int] = set()
 
-def do_build_markov_sentence(
-    current_word: Optional[str], model: Dict[str, List], word_count: int, max_words: int
-) -> List[str]:
-    # 1st word scenario: find a valid sentence start
-    if current_word is None:
-        current_word = choice(list(model.keys()))  # really not needing these casts but to silence the linter
-        while SENTENCE_START_DELIMITER not in model[current_word]:
-            current_word = choice(list(model.keys()))
+    def debug_model(self):
+        print("Symbols Dictionary:", self.dictionary)
+        print("Start words:", self.sentence_start_words)
+        print("Transitions:", self.transitions)
 
-        return [current_word] + do_build_markov_sentence(
-            current_word=current_word, model=model, word_count=word_count + 1, max_words=max_words
+    def build_model(self, sentences: List[str]):
+        sentence_end_index = self._get_word_index(SENTENCE_END_DELIMITER)
+
+        for sentence in sentences:
+            sentence_words = sentence.lower().split(" ")
+            if len(sentence_words) < 2:
+                raise ValueError("Sentences must be at least two words")
+            # we want to stop at the second to last word, as we always compare i with i+1
+            for index in range(len(sentence_words) - 1):
+                word_index = self._get_word_index(sentence_words[index])
+
+                if index == 0:
+                    self.sentence_start_words.add(word_index)
+
+                next_word_index = self._get_word_index(sentence_words[index+1])
+
+                self._add_transition(word_index, next_word_index)
+
+                # last word in sentence
+                if index == len(sentence_words) - 2:
+                    self._add_transition(next_word_index, sentence_end_index)
+
+    def build_markov_sentence(self, max_words: int) -> str:
+        # Note that we don't take into account weights for picking the starting word
+        first_word_index = choice(list(self.sentence_start_words))
+        first_word = self.dictionary[first_word_index]
+
+        words = [first_word] + self._do_build_markov_sentence(current_word_index=first_word_index, word_count=1, max_words=max_words)
+
+        words[0] = words[0].capitalize()
+        return " ".join(words[:-1]) + words[-1]
+
+    def _do_build_markov_sentence(self, current_word_index: int, word_count: int, max_words: int) -> List[str]:
+        # surpassed max words
+        if word_count > max_words:
+            return [SENTENCE_END_DELIMITER]
+
+        potential_next_words = self.transitions[current_word_index]
+
+        new_word_index = sample(list(potential_next_words.keys()), 1)[0]
+        new_word = self.dictionary[new_word_index]
+
+        # chosen to end the sentence
+        if new_word == SENTENCE_END_DELIMITER:
+            return [new_word]
+
+        return [new_word] + self._do_build_markov_sentence(
+            current_word_index=new_word_index, word_count=word_count + 1, max_words=max_words
         )
 
-    is_valid_word = False
-    while not is_valid_word:
-        new_word = choice(list(model[current_word]))
-        # we should ignore start delimiter
-        if new_word != SENTENCE_START_DELIMITER:
-            is_valid_word = True
-        # but we don't want one-word sentences either
-        if new_word == SENTENCE_END_DELIMITER and word_count == 0:
-            is_valid_word = False
+    def _get_word_index(self, word: str) -> int:
+        word_index = len(self.dictionary)
+        if word not in self.dictionary.values():
+            self.dictionary[word_index] = word
+        else:
+            word_index = [k for k, v in self.dictionary.items() if v == word][0]
 
-    # we're done
-    if new_word == SENTENCE_END_DELIMITER:
-        return ["."]
+        return word_index
 
-    if word_count + 1 < max_words:
-        return [new_word] + do_build_markov_sentence(
-            current_word=new_word, model=model, word_count=word_count + 1, max_words=max_words
-        )
-
-    # if still here, we're also done because we reached maximum sentence length
-    return [new_word, "..."]
+    def _add_transition(self, current: int, next: int):
+        if current not in self.transitions:
+            self.transitions[current] = defaultdict(int)
+        self.transitions[current][next] += 1
 
 
-def _load_sentences(filename: str) -> List[str]:
+def load_sentences(filename: str) -> List[str]:
     sentences = []
-    with open(filename, "r") as sentences_file:
+    with open(filename, "r", encoding="utf8") as sentences_file:
         sentence = sentences_file.readline()
         while sentence:
+            # TODO: regex to only leave alphanumeric characters and spaces
             sentence = sentence.replace(",", "").replace(":", "").replace(";", "").replace("\n", "").replace("\"", "")
             sentences.append(sentence)
             sentence = sentences_file.readline()
@@ -100,26 +108,15 @@ def _load_sentences(filename: str) -> List[str]:
 
 
 if __name__ == '__main__':
+    markov_model = MarkovModel()
 
-    # trivial example (model very simple to understand if printed)
-    # filename = "simple_test.txt"
-    # max_words = 5
+    input_file = "markov_quotes.txt"
+    markov_model.build_model(load_sentences(input_file))
 
-    # simple example using some quotes
-    filename = "markov_quotes.txt"
-    max_words = 20
+    # markov_model.debug_model()
 
-    # more complex example from a TED talk
-    # https://www.ted.com/talks/jeremy_howard_the_wonderful_and_terrifying_implications_of_computers_that_can_learn/
-    # filename = "markov_ted_talk.txt"
-    # max_words = 30
+    max_sentence_words = 20
+    num_sentences = 10
 
-    sentences = _load_sentences(filename=filename)
-    model = build_model(sentences)
-
-    # uncomment this to see the full model (in the end is a Dict)
-    # print(model)
-
-    for _ in range(10):
-        markov_sentence = build_markov_sentence(model=model, max_words=max_words)
-        print(markov_sentence)
+    for _ in range(num_sentences):
+        print(markov_model.build_markov_sentence(max_sentence_words))
