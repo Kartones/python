@@ -18,7 +18,8 @@
       "labels": [
         "dependencies"
       ],
-      "automerge": true
+      "automerge": true,
+      "ignoreTests": true
     },
     {
       "matchPackagePatterns": [
