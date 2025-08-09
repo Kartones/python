@@ -1,0 +1,2 @@
+Mastodon.py==2.0.1
+pytz==2025.2

@@ -1,9 +1,6 @@
-# Register new app at https://mastodon.technology/settings/applications and fill the fields
-API_URL = "https://mastodon.technology"
+# Register new app at https://fosstodon.org/settings/applications/ and fill the fields
+API_URL = "https://fosstodon.org"
 CLIENT_KEY = ""
 CLIENT_SECRET = ""
 ACCESS_TOKEN = ""
 DAYS_TO_KEEP = 5
-
-USERNAME = ""
-PASSWORD = ""

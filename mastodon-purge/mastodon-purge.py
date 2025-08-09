@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 import pytz
-# https://github.com/halcy/Mastodon.py/
 from mastodon import Mastodon
 
 import config
@@ -14,12 +13,6 @@ def process():
         access_token=config.ACCESS_TOKEN,
         api_base_url=config.API_URL,
         ratelimit_method="throw"
-    )
-
-    api.log_in(
-        username=config.USERNAME,
-        password=config.PASSWORD,
-        scopes=["read", "write"]
     )
 
     toots = fetch_toots(api)
