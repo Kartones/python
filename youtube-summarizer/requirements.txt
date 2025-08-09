@@ -1,2 +1,2 @@
 youtube-transcript-api==1.2.2
-openai==1.99.5
+openai==1.99.6
