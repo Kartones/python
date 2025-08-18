@@ -6,7 +6,7 @@ mypy==1.17.1
 pygame==2.6.1
 
 pytest==8.4.1
-requests==2.32.4
+requests==2.32.5
 
 pytz==2025.2
 
