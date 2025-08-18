@@ -1,2 +1,2 @@
-Mastodon.py==2.0.1
+Mastodon.py==2.1.0
 pytz==2025.2
