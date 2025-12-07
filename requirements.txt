@@ -5,7 +5,7 @@ mypy==1.19.0
 # https://github.com/pygame/pygame/issues/3522
 pygame==2.6.1
 
-pytest==9.0.1
+pytest==9.0.2
 requests==2.32.5
 
 pytz==2025.2
