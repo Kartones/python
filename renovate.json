@@ -19,7 +19,8 @@
         "dependencies"
       ],
       "automerge": true,
-      "ignoreTests": true
+      "minimumReleaseAge": "7 days",
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
     },
     {
       "matchPackagePatterns": [
@@ -31,7 +32,9 @@
       "labels": [
         "dependencies",
         "breaking"
-      ]
+      ],
+      "minimumReleaseAge": "7 days",
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
     }
   ]
 }
