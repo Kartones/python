@@ -1,0 +1,25 @@
+# Title
+
+<your blog description here>
+
+Below there is a list of all articles and pages. While the site does not provide search, there are a per-tag grouping of articles [in the tags page]({{ SITEURL }}/tags.html.md) and [a list of all post archives with descriptions]({{ SITEURL }}/archives_with_descriptions.md).
+
+## Articles
+
+{% for article in articles %}
+- [{{ article.title }}]({{ SITEURL }}/{{ article.url }}index.html.md) - {{ article.date.strftime("%Y-%m-%d") }}
+{% endfor %}
+
+## Pages
+
+{% for page in pages + hidden_pages + draft_pages if page.slug not in LLMS_EXPORT_CONTENT_EXCLUSIONS %}
+- [{{ page.title }}]({{ SITEURL }}/{{ page.url }}index.html.md)
+{% endfor %}
+
+## Optional
+
+- [Archives]({{ SITEURL }}/archives.html.md)
+{% for page_num in range(1, LLMS_EXPORT_MAX_INDEX_PAGES + 1) %}
+- [Index{% if page_num > 1 %} page {{ page_num }}{% endif %}]({{ SITEURL }}/index{% if page_num > 1 %}{{ page_num }}{% endif %}.html.md)
+{% endfor %}
+- [Tags]({{ SITEURL }}/tags.html.md)
