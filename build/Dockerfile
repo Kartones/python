@@ -26,5 +26,5 @@ USER $uid
 COPY requirements.txt /code/requirements.txt
 
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip==26.2.2
 RUN pip install -r /code/requirements.txt
